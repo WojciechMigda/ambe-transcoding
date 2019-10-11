@@ -1,3 +1,9 @@
+set( CMAKE_CXX_STANDARD 17 )
+
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+
 add_executable( ambep2 "src/dummy.cpp" )
 target_sources( ambep2 PRIVATE "src/main.cpp" )
 
