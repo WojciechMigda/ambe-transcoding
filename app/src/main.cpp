@@ -1,3 +1,5 @@
+#include "json/json.hpp"
+
 #include <iostream>
 #include <vector>
 #include <array>
@@ -113,8 +115,12 @@ int main(int argc, char **argv)
 
     auto speech_vec = read_pcm_file(argv[1]);
 
-    auto encoded_speech = encode_speech(speech_vec);
-    std::cout << encoded_speech.size() << '\n';
+    auto const encoded_speech = encode_speech(speech_vec);
+
+    nlohmann::json json;
+    json["dvsi:ambep2"] = nlohmann::json(encoded_speech);
+
+    std::cout << json.dump() << '\n';
 
     return 0;
 }
