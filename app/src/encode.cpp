@@ -50,7 +50,7 @@ std::vector<speech_arr_t> read_pcm_file(char const * fname_p)
 }
 
 
-std::vector<uint64_t> encode_speech(std::vector<speech_arr_t> &speech_vec)
+std::vector<std::uint64_t> encode_speech(std::vector<speech_arr_t> &speech_vec)
 {
     ENCSTATE_T es;
     FECSTATE_T efec;
@@ -59,13 +59,11 @@ std::vector<uint64_t> encode_speech(std::vector<speech_arr_t> &speech_vec)
     ambe_init_fec(&efec, APCO_HR_MODE);
 
     std::array<std::int16_t, APCO_HR_SRCBITS_NOM> ochan;
-    std::vector<uint64_t> rv(speech_vec.size());
+    std::vector<std::uint64_t> rv(speech_vec.size());
 
     std::transform(speech_vec.begin(), speech_vec.end(), rv.begin(),
         [&](speech_arr_t & sample)
         {
-            std::fill(ochan.begin(), ochan.end(), 0);
-
             ambe_voice_enc(
                 ochan.data(),
                 0,
